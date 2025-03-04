@@ -45,7 +45,7 @@ export default function Home() {
                         className="rounded-full mx-auto border-4 border-white shadow-lg"
                     />
                     <h1 className="text-5xl font-bold mt-4">Antoine Perry</h1>
-                    <p className="text-xl mt-2 text-gray-400">Ingénieur Full Stack</p>
+                    <p className="text-xl mt-2 text-gray-400">Ingénieur Full Stack - Intelligence Artificielle</p>
                 </motion.div>
 
                 {/* Two-Column Layout */}
@@ -56,6 +56,14 @@ export default function Home() {
                         <h2 className="text-xl font-semibold mb-3">📞 Contact</h2>
                         <p className="text-gray-300">+33 6 74 18 13 95</p>
                         <p className="text-gray-300">contact@antoineperry.fr</p>
+
+                        {/* Outils */}
+                        <h2 className="text-xl font-semibold mt-6 mb-3">🛠 Outils</h2>
+                        <p>Git, GitHub, JetBrains Soft, Postman, Atom, Photoshop, Lightroom</p>
+
+                        {/* Centres d'intérêts */}
+                        <h2 className="text-xl font-semibold mt-6 mb-3">🎵 Centres d'intérêts</h2>
+                        <p>Guitare, Batterie, Boxe, Cross-training, Course à pied</p>
 
                         {/* Skills with Animated Progress Bars */}
                         <h2 className="text-xl font-semibold mt-6 mb-3">💻 Compétences</h2>
@@ -94,6 +102,10 @@ export default function Home() {
                         {/* Experience */}
                         <h2 className="text-xl font-semibold mb-3">🚀 Expérience</h2>
                         {[{
+                            title: "Chercheur en Intelligence Artificielle",
+                            date: "Janvier 2022 - Octobre 2024",
+                            description: "Utilisation des CNN, LSTM et LLM pour la détection de maladies sur des images médicales de tympans."
+                        },{
                             title: "My Medical Assistant",
                             date: "Depuis Juillet 2018",
                             description: "Développement de iAudiogram, plateforme de télé-audiométrie et gestion patient-médecin."
@@ -117,6 +129,10 @@ export default function Home() {
                         <h2 className="text-xl font-semibold mt-6 mb-3">🎓 Formation</h2>
                         <p><strong>Cycle Ingénieur Spécialité Logiciel</strong> - ISEP Paris (2017-2020)</p>
                         <p><strong>Spécialisation Sécurité Informatique</strong> - Chalmers University, Suède (2020)</p>
+
+                        {/* Certifications */}
+                        <h2 className="text-xl font-semibold mt-6 mb-3">🏆 Publications</h2>
+                        <p><strong>Deep Learning for Medical Image Analysis</strong> - Springer (2023)</p>
                     </div>
                 </div>
             </motion.div>
