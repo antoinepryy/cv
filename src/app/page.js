@@ -1,7 +1,17 @@
-'use client';
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import {
+    SiPython,
+    SiReact,
+    SiSpring,
+    SiPhp,
+    SiSymfony,
+    SiMysql,
+    SiJavascript,
+    SiDocker
+} from "react-icons/si";
 
 const primaryColor = "#2563eb"; // Blue-600
 const secondaryColor = "#1e40af"; // Blue-700
@@ -23,13 +33,15 @@ const progressVariants = {
 
 export default function Home() {
     const skills = [
-        { skill: "Python", level: 90 },
-        { skill: "React JS", level: 85 },
-        { skill: "Java", level: 80 },
-        { skill: "Spring", level: 75 },
-        { skill: "PHP", level: 70 },
-        { skill: "Symfony", level: 65 },
-        { skill: "SQL", level: 60 },
+        { skill: "Python", level: 90, icon: <SiPython size={30} /> },
+        { skill: "React JS", level: 85, icon: <SiReact size={30} /> },
+        { skill: "Spring", level: 75, icon: <SiSpring size={30} /> },
+        { skill: "PHP", level: 70, icon: <SiPhp size={30} /> },
+        { skill: "Symfony", level: 65, icon: <SiSymfony size={30} /> },
+        { skill: "SQL", level: 60, icon: <SiMysql size={30} /> },
+        // Additional skills
+        { skill: "JavaScript", level: 80, icon: <SiJavascript size={30} /> },
+        { skill: "Docker", level: 70, icon: <SiDocker size={30} /> },
     ];
 
     const experiences = [
@@ -38,7 +50,6 @@ export default function Home() {
             date: "Depuis Décembre 2019",
             description:
                 "Développement de sites web, applications mobiles, chatbots et IA pour divers clients.",
-
         },
         {
             title: "Chercheur en Intelligence Artificielle",
@@ -170,8 +181,16 @@ export default function Home() {
                     <div>
                         {/* Contact */}
                         <h2 className="text-xl font-semibold mb-3">📞 Contact</h2>
-                        <p className="text-gray-300">+33 6 74 18 13 95</p>
-                        <p className="text-gray-300">contact@antoineperry.fr</p>
+                        <p className="text-gray-300">
+                            <a href="tel:+33674181395" className="underline hover:text-blue-400 transition duration-300">
+                                +33 6 74 18 13 95
+                            </a>
+                        </p>
+                        <p className="text-gray-300">
+                            <a href="mailto:contact@antoineperry.fr" className="underline hover:text-blue-400 transition duration-300">
+                                contact@antoineperry.fr
+                            </a>
+                        </p>
 
                         {/* Outils */}
                         <h2 className="text-xl font-semibold mt-6 mb-3">🛠 Outils</h2>
@@ -187,6 +206,10 @@ export default function Home() {
                         <h2 className="text-xl font-semibold mt-6 mb-3">💻 Compétences</h2>
                         {skills.map((item, index) => (
                             <div key={index} className="mb-4">
+                                <div className="flex items-center mb-1">
+                                    {item.icon}
+                                    <p className="text-sm font-semibold ml-2">{item.skill}</p>
+                                </div>
                                 <div className="flex justify-between items-center mb-1">
                                     <p className="text-sm font-semibold">{item.skill}</p>
                                     <p className="text-xs text-gray-400">{item.level}%</p>
