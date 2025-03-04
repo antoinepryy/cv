@@ -10,7 +10,7 @@ import {
     SiSymfony,
     SiMysql,
     SiJavascript,
-    SiDocker
+    SiDocker, SiKubernetes, SiTensorflow, SiPytorch
 } from "react-icons/si";
 
 const primaryColor = "#2563eb"; // Blue-600
@@ -35,13 +35,16 @@ export default function Home() {
     const skills = [
         { skill: "Python", level: 90, icon: <SiPython size={30} /> },
         { skill: "React JS", level: 85, icon: <SiReact size={30} /> },
-        { skill: "Spring", level: 75, icon: <SiSpring size={30} /> },
+        { skill: "React Native", level: 80, icon: <SiReact size={30} /> },
+        { skill: "Spring", level: 60, icon: <SiSpring size={30} /> },
         { skill: "PHP", level: 70, icon: <SiPhp size={30} /> },
         { skill: "Symfony", level: 65, icon: <SiSymfony size={30} /> },
         { skill: "SQL", level: 60, icon: <SiMysql size={30} /> },
-        // Additional skills
-        { skill: "JavaScript", level: 80, icon: <SiJavascript size={30} /> },
-        { skill: "Docker", level: 70, icon: <SiDocker size={30} /> },
+        { skill: "JavaScript", level: 90, icon: <SiJavascript size={30} /> },
+        { skill: "Docker", level: 80, icon: <SiDocker size={30} /> },
+        { skill: "Kubernetes", level: 65, icon: <SiKubernetes size={30} /> },
+        { skill: "TensorFlow", level: 80, icon: <SiTensorflow size={30} /> },
+        { skill: "PyTorch", level: 70, icon: <SiPytorch size={30} /> },
     ];
 
     const experiences = [
@@ -91,6 +94,7 @@ export default function Home() {
                 "Test-retest BC thresholds measured with ML-audiometer.",
                 "+14",
             ],
+            link: "/Multilabel Classification of Otoscopy Images.pdf",
         },
         {
             title:
@@ -100,6 +104,7 @@ export default function Home() {
             date: "November 2024",
             reads: "45 Reads",
             citations: "1 Citation",
+            link: "/Performance_and_Reliability_Evaluation_of_an_Autom.pdf",
             journal: "Trends in Hearing",
             authors: [
                 "Nicolas Wallaert",
@@ -117,6 +122,7 @@ export default function Home() {
             linkText: "Full-text available",
             date: "September 2024",
             reads: "63 Reads",
+            link: "/Performance_and_reliability_evaluation_of_an_impro.pdf",
             citations: "2 Citations",
             journal:
                 "World Journal of Otorhinolaryngology - Head and Neck Surgery",
@@ -266,45 +272,12 @@ export default function Home() {
                         {/* Publications */}
                         <h2 className="text-xl font-semibold mt-6 mb-3">🏆 Publications</h2>
                         {publications.map((pub, index) => (
-                            <motion.div
-                                key={index}
-                                className="mb-6 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition duration-300"
-                                whileHover={{ scale: 1.02 }}
-                            >
+                            <motion.div key={index} className="mb-6 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition duration-300" whileHover={{ scale: 1.02 }}>
                                 <h3 className="text-lg font-semibold">{pub.title}</h3>
-                                <p className="text-gray-400 text-sm">
-                                    {pub.type} • {pub.date}
-                                </p>
-                                <p className="text-sm mt-1">
-                                    <strong>Auteurs:</strong> {pub.authors.join(", ")}
-                                </p>
-                                {pub.journal && (
-                                    <p className="text-sm mt-1">
-                                        <strong>Revue:</strong> {pub.journal}
-                                    </p>
-                                )}
-                                {(pub.reads || pub.citations) && (
-                                    <p className="text-xs text-gray-400 mt-1">
-                                        {pub.reads} {pub.citations && " • " + pub.citations}
-                                    </p>
-                                )}
-                                {pub.linkText && (
-                                    <p className="text-xs text-blue-300 mt-1 underline cursor-pointer">
-                                        {pub.linkText}
-                                    </p>
-                                )}
-                                {pub.extra && (
-                                    <ul className="list-disc list-inside mt-2 text-xs text-gray-300">
-                                        {pub.extra.map((item, idx) => (
-                                            <li key={idx}>{item}</li>
-                                        ))}
-                                    </ul>
-                                )}
-                                {pub.abstract && (
-                                    <p className="text-xs text-gray-300 mt-2 line-clamp-3">
-                                        {pub.abstract}
-                                    </p>
-                                )}
+                                <p className="text-gray-400 text-sm">{pub.type} • {pub.date}</p>
+                                <p className="text-sm mt-1"><strong>Auteurs:</strong> {pub.authors.join(", ")}</p>
+                                {pub.journal && <p className="text-sm mt-1"><strong>Revue:</strong> {pub.journal}</p>}
+                                <a href={pub.link} className="text-xs text-blue-300 mt-1 underline cursor-pointer" target="_blank" rel="noopener noreferrer">Full-text available</a>
                             </motion.div>
                         ))}
                     </div>
