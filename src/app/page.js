@@ -62,7 +62,7 @@ export default function Home() {
                         <p>Git, GitHub, JetBrains Soft, Postman, Atom, Photoshop, Lightroom</p>
 
                         {/* Centres d'intérêts */}
-                        <h2 className="text-xl font-semibold mt-6 mb-3">🎵 Centres d'intérêts</h2>
+                        <h2 className="text-xl font-semibold mt-6 mb-3">🎵 Centres d&apos;intérêts</h2>
                         <p>Guitare, Batterie, Boxe, Cross-training, Course à pied</p>
 
                         {/* Skills with Animated Progress Bars */}
