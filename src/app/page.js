@@ -10,26 +10,15 @@ import {
     SiSymfony,
     SiMysql,
     SiJavascript,
-    SiDocker, SiKubernetes, SiTensorflow, SiPytorch
+    SiDocker,
+    SiKubernetes,
+    SiTensorflow,
+    SiPytorch,
 } from "react-icons/si";
 
 const primaryColor = "#2563eb"; // Blue-600
 const secondaryColor = "#1e40af"; // Blue-700
 const textColor = "#ffffff"; // White
-const progressBarBg = "#3b82f6"; // Blue-500
-
-// Variants for the progress bar animation
-const progressVariants = {
-    initial: { width: "0%" },
-    animate: (level) => ({
-        width: `${level}%`,
-        transition: { duration: 1.5, ease: "easeOut" },
-    }),
-    hover: {
-        scale: 1.02,
-        transition: { duration: 0.3 },
-    },
-};
 
 export default function Home() {
     const skills = [
@@ -137,152 +126,183 @@ export default function Home() {
         },
     ];
 
-    return (
-        <div
-            className="min-h-screen flex flex-col items-center justify-center p-6 sm:p-10 relative overflow-hidden"
-            style={{ color: textColor }}
-        >
-            {/* Background Animation */}
-            <motion.div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                    backgroundImage: "url('/lake.jpg')",
-                    filter: "brightness(0.3)",
-                }}
-                initial={{ scale: 1.1 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 5, repeat: Infinity, repeatType: "reverse" }}
-            />
+    const handleExport = () => {
+        window.print();
+    };
 
-            {/* Content Wrapper */}
-            <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                className="relative z-10 w-full max-w-5xl p-8 rounded-lg shadow-lg bg-gray-900 bg-opacity-90 backdrop-blur-lg"
+    return (
+        <div className="printable">
+            {/* Global print styles */}
+            <style jsx global>{`
+                @media print {
+                    body * {
+                        visibility: hidden;
+                    }
+                    .printable, .printable * {
+                        visibility: visible;
+                    }
+                    .printable {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 210mm;
+                        height: 297mm;
+                        /* Adjust padding and margins as needed */
+                    }
+                    /* Optionally hide the export button when printing */
+                    .no-print {
+                        display: none;
+                    }
+                }
+            `}</style>
+            <div
+                className="min-h-screen flex flex-col items-center justify-center p-6 sm:p-10 relative overflow-hidden"
+                style={{ color: textColor }}
             >
-                {/* Header with Image */}
+                {/* Export Button */}
+                <div className="absolute top-4 right-4 no-print">
+                    <button
+                        onClick={handleExport}
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300"
+                    >
+                        Export PDF
+                    </button>
+                </div>
+
+                {/* Background Animation */}
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                        backgroundImage: "url('/lake.jpg')",
+                        filter: "brightness(0.3)",
+                    }}
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 5, repeat: Infinity, repeatType: "reverse" }}
+                />
+
+                {/* Content Wrapper */}
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    className="text-center mb-10"
+                    className="relative z-10 w-full max-w-5xl p-8 rounded-lg shadow-lg bg-gray-900 bg-opacity-90 backdrop-blur-lg"
                 >
-                    <Image
-                        src="/profile.jpg"
-                        alt="Antoine Perry"
-                        width={150}
-                        height={150}
-                        className="rounded-full mx-auto border-4 border-white shadow-lg"
-                    />
-                    <h1 className="text-5xl font-bold mt-4">Antoine Perry</h1>
-                    <p className="text-xl mt-2 text-gray-400">
-                        Ingénieur Full Stack - Intelligence Artificielle
-                    </p>
-                </motion.div>
-
-                {/* Two-Column Layout with Responsive Design */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Left Side */}
-                    <div>
-                        {/* Contact */}
-                        <h2 className="text-xl font-semibold mb-3">📞 Contact</h2>
-                        <p className="text-gray-300">
-                            <a href="tel:+33674181395" className="underline hover:text-blue-400 transition duration-300">
-                                +33 6 74 18 13 95
-                            </a>
+                    {/* Header with Image */}
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                        className="text-center mb-10"
+                    >
+                        <Image
+                            src="/profile.jpg"
+                            alt="Antoine Perry"
+                            width={150}
+                            height={150}
+                            className="rounded-full mx-auto border-4 border-white shadow-lg"
+                        />
+                        <h1 className="text-5xl font-bold mt-4">Antoine Perry</h1>
+                        <p className="text-xl mt-2 text-gray-400">
+                            Ingénieur Full Stack - Intelligence Artificielle
                         </p>
-                        <p className="text-gray-300">
-                            <a href="mailto:contact@antoineperry.fr" className="underline hover:text-blue-400 transition duration-300">
-                                contact@antoineperry.fr
-                            </a>
-                        </p>
+                    </motion.div>
 
-                        {/* Outils */}
-                        <h2 className="text-xl font-semibold mt-6 mb-3">🛠 Outils</h2>
-                        <p>Git, GitHub, JetBrains Soft, Postman, Atom, Photoshop, Lightroom</p>
+                    {/* Two-Column Layout with Responsive Design */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* Left Side */}
+                        <div>
+                            {/* Contact */}
+                            <h2 className="text-xl font-semibold mb-3">📞 Contact</h2>
+                            <p className="text-gray-300">
+                                <a href="tel:+33674181395" className="underline hover:text-blue-400 transition duration-300">
+                                    +33 6 74 18 13 95
+                                </a>
+                            </p>
+                            <p className="text-gray-300">
+                                <a href="mailto:contact@antoineperry.fr" className="underline hover:text-blue-400 transition duration-300">
+                                    contact@antoineperry.fr
+                                </a>
+                            </p>
 
-                        {/* Centres d'intérêts */}
-                        <h2 className="text-xl font-semibold mt-6 mb-3">
-                            🎵 Centres d&apos;intérêts
-                        </h2>
-                        <p>Guitare, Batterie, Boxe, Cross-training, Course à pied</p>
+                            {/* Outils */}
+                            <h2 className="text-xl font-semibold mt-6 mb-3">🛠 Outils</h2>
+                            <p>Git, GitHub, JetBrains Soft, Postman, Atom, Photoshop, Lightroom</p>
 
-                        {/* Skills with Animated Progress Bars */}
-                        <h2 className="text-xl font-semibold mt-6 mb-3">💻 Compétences</h2>
-                        {skills.map((item, index) => (
-                            <div key={index} className="mb-4">
-                                <div className="flex items-center mb-1">
-                                    {item.icon}
-                                    <p className="text-sm font-semibold ml-2">{item.skill}</p>
-                                </div>
-                                <div className="flex justify-between items-center mb-1">
-                                    <p className="text-sm font-semibold">{item.skill}</p>
-                                    <p className="text-xs text-gray-400">{item.level}%</p>
-                                </div>
-                                <div className="w-full bg-gray-700 rounded-full h-4 overflow-hidden">
+                            {/* Centres d'intérêts */}
+                            <h2 className="text-xl font-semibold mt-6 mb-3">
+                                🎵 Centres d&apos;intérêts
+                            </h2>
+                            <p>Guitare, Batterie, Boxe, Cross-training, Course à pied</p>
+
+                            {/* Skills without Progress Bars */}
+                            <h2 className="text-xl font-semibold mt-6 mb-3">💻 Compétences</h2>
+                            <div className="grid grid-cols-2 gap-4">
+                                {skills.map((item, index) => (
                                     <motion.div
-                                        className="h-4 rounded-full"
-                                        style={{ backgroundColor: progressBarBg }}
-                                        custom={item.level}
-                                        variants={progressVariants}
-                                        initial="initial"
-                                        animate="animate"
-                                        whileHover="hover"
-                                    />
-                                </div>
+                                        key={index}
+                                        className="flex items-center p-3 bg-gray-800 rounded-lg shadow transition transform hover:scale-105"
+                                    >
+                                        <div className="mr-3">{item.icon}</div>
+                                        <p className="text-sm font-semibold">{item.skill}</p>
+                                    </motion.div>
+                                ))}
                             </div>
-                        ))}
 
-                        {/* Languages with Icons */}
-                        <h2 className="text-xl font-semibold mt-6 mb-3">🌍 Langues</h2>
-                        <p>🇫🇷 Français - Langue maternelle</p>
-                        <p>🇬🇧 Anglais - Niveau Courant (TOEIC 895)</p>
-                        <p>🇪🇸 Espagnol - Niveau Opérationnel</p>
-                        <p>🇯🇵 Japonais - Notions</p>
+                            {/* Languages with Icons */}
+                            <h2 className="text-xl font-semibold mt-6 mb-3">🌍 Langues</h2>
+                            <p>🇫🇷 Français - Langue maternelle</p>
+                            <p>🇬🇧 Anglais - Niveau Courant (TOEIC 895)</p>
+                            <p>🇪🇸 Espagnol - Niveau Opérationnel</p>
+                            <p>🇯🇵 Japonais - Notions</p>
+                        </div>
+
+                        {/* Right Side */}
+                        <div>
+                            {/* Experience */}
+                            <h2 className="text-xl font-semibold mb-3">🚀 Expérience</h2>
+                            {experiences.map((job, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="mb-4 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition duration-300"
+                                    whileHover={{ scale: 1.02 }}
+                                >
+                                    <h3 className="text-lg font-semibold">{job.title}</h3>
+                                    <p className="text-gray-400 text-sm">{job.date}</p>
+                                    <p className="text-sm mt-1">{job.description}</p>
+                                </motion.div>
+                            ))}
+
+                            {/* Education */}
+                            <h2 className="text-xl font-semibold mt-6 mb-3">🎓 Formation</h2>
+                            <p>
+                                <strong>Cycle Ingénieur Spécialité Logiciel</strong> - ISEP Paris
+                                (2017-2020)
+                            </p>
+                            <p>
+                                <strong>Spécialisation Sécurité Informatique</strong> - Chalmers
+                                University, Suède (2020)
+                            </p>
+                            <p>
+                                <strong>Doctorat en Intelligence Artificielle</strong> - ISEP Paris
+                                (2022-2024)
+                            </p>
+
+                            {/* Publications */}
+                            <h2 className="text-xl font-semibold mt-6 mb-3">🏆 Publications</h2>
+                            {publications.map((pub, index) => (
+                                <motion.div key={index} className="mb-6 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition duration-300" whileHover={{ scale: 1.02 }}>
+                                    <h3 className="text-lg font-semibold">{pub.title}</h3>
+                                    <p className="text-gray-400 text-sm">{pub.type} • {pub.date}</p>
+                                    <p className="text-sm mt-1"><strong>Auteurs:</strong> {pub.authors.join(", ")}</p>
+                                    {pub.journal && <p className="text-sm mt-1"><strong>Revue:</strong> {pub.journal}</p>}
+                                    <a href={pub.link} className="text-xs text-blue-300 mt-1 underline cursor-pointer" target="_blank" rel="noopener noreferrer">Full-text available</a>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
-
-                    {/* Right Side */}
-                    <div>
-                        {/* Experience */}
-                        <h2 className="text-xl font-semibold mb-3">🚀 Expérience</h2>
-                        {experiences.map((job, index) => (
-                            <motion.div
-                                key={index}
-                                className="mb-4 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition duration-300"
-                                whileHover={{ scale: 1.02 }}
-                            >
-                                <h3 className="text-lg font-semibold">{job.title}</h3>
-                                <p className="text-gray-400 text-sm">{job.date}</p>
-                                <p className="text-sm mt-1">{job.description}</p>
-                            </motion.div>
-                        ))}
-
-                        {/* Education */}
-                        <h2 className="text-xl font-semibold mt-6 mb-3">🎓 Formation</h2>
-                        <p>
-                            <strong>Cycle Ingénieur Spécialité Logiciel</strong> - ISEP Paris
-                            (2017-2020)
-                        </p>
-                        <p>
-                            <strong>Spécialisation Sécurité Informatique</strong> - Chalmers
-                            University, Suède (2020)
-                        </p>
-
-                        {/* Publications */}
-                        <h2 className="text-xl font-semibold mt-6 mb-3">🏆 Publications</h2>
-                        {publications.map((pub, index) => (
-                            <motion.div key={index} className="mb-6 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition duration-300" whileHover={{ scale: 1.02 }}>
-                                <h3 className="text-lg font-semibold">{pub.title}</h3>
-                                <p className="text-gray-400 text-sm">{pub.type} • {pub.date}</p>
-                                <p className="text-sm mt-1"><strong>Auteurs:</strong> {pub.authors.join(", ")}</p>
-                                {pub.journal && <p className="text-sm mt-1"><strong>Revue:</strong> {pub.journal}</p>}
-                                <a href={pub.link} className="text-xs text-blue-300 mt-1 underline cursor-pointer" target="_blank" rel="noopener noreferrer">Full-text available</a>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </motion.div>
+                </motion.div>
+            </div>
         </div>
     );
 }
